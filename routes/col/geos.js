@@ -6,6 +6,15 @@ let log     = App.log.child({module:'geo'}); //<-Sustituir por el nombre
 let geoip = require('geoip-lite');
 let exec = require('child_process').exec;
 
+router.get('/git-test', (req, res, next) =>{
+  let branch = 'master';
+  
+  res.json({
+    'resp': 'Prueba GIT: ésta es la rama -->> ' + branch + ' <<--',
+    'branch': branch
+  });
+});
+
 router.get('/donde', (req, res, next) =>{ 
   let geo;
   let ip    = req.headers["X-Forwarded-For"] || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
