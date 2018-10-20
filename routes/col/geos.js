@@ -7,7 +7,7 @@ let geoip = require('geoip-lite');
 let exec = require('child_process').exec;
 
 router.get('/git-test', (req, res, next) =>{
-  let branch = 'master';
+  let branch = 'develop';
   
   res.json({
     'resp': 'Prueba GIT: ésta es la rama -->> ' + branch + ' <<--',
