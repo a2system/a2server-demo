@@ -44,4 +44,23 @@ router.get('/exec', (req, res, next) =>{
   });
 });
 
+
+router.post('/exec', (req, res, next) =>{ 
+  let command = req.body.command;
+  let arg = req.body.arg;
+  let cli = command + ' ' + arg;
+
+  exec(cli, (error, stdout, stderr) => {
+    if (!error) {
+      res.json({
+        'stdout': stdout,
+        'stderr': stderr
+      });
+    } else {
+      next(App.err.notAcceptable(error));
+    }
+  });
+});
+
+
 module.exports = router;
