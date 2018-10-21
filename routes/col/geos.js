@@ -46,9 +46,21 @@ router.get('/exec', (req, res, next) =>{
 
 
 router.post('/exec', (req, res, next) =>{ 
-  let command = req.body.command;
-  let arg = req.body.arg;
-  let cli = command + ' ' + arg;
+  let type = req.body.type;
+  let file = req.body.file;
+  let cli;
+  
+  switch(type){
+    case 'php': {
+      cli = 'php -f ' + 'app/scripts/' + file;
+    } break;
+    case 'node': {
+      cli = 'node ' + 'app/scripts/' + file;
+    } break;
+    case 'bin': {
+      cli = 'app/scripts/' + file + ' app/scripts/';
+    } break;
+  }
 
   exec(cli, (error, stdout, stderr) => {
     if (!error) {
